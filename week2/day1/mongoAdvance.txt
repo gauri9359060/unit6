@@ -1,0 +1,84 @@
+- Create database
+use movieMock
+
+- create collection 
+db.createCollection("movies")
+
+- insert mock movie data into database
+
+db.movies.insertMany([{"id":1,"movie_name":"Maltese Falcon, The (a.k.a. Dangerous Female)","movie_genre":"Mystery","production_year":"2005-04","budget":"$11153.23"},
+{"id":2,"movie_name":"29 Palms","movie_genre":"Comedy|Drama|Thriller","production_year":"2011-11","budget":"$13662.83"},
+{"id":3,"movie_name":"Paperboy, The","movie_genre":"Thriller","production_year":"1992-10","budget":"$11111.81"},
+{"id":4,"movie_name":"Brenda Starr","movie_genre":"Adventure","production_year":"1996-05","budget":"$11545.21"},
+{"id":5,"movie_name":"Made of Honor","movie_genre":"Comedy|Romance","production_year":"1999-12","budget":"$14339.56"},
+{"id":6,"movie_name":"Back to the Garden, Flower Power Comes Full Circle","movie_genre":"Documentary","production_year":"1992-02","budget":"$14240.64"},
+{"id":7,"movie_name":"Spoilers, The","movie_genre":"Action|Western","production_year":"1990-08","budget":"$11171.15"},
+{"id":8,"movie_name":"Born to Kill","movie_genre":"Crime|Drama|Film-Noir","production_year":"1995-11","budget":"$17884.72"},
+{"id":9,"movie_name":"Tim's Vermeer","movie_genre":"Documentary","production_year":"2003-01","budget":"$13696.43"},
+{"id":10,"movie_name":"Tapia","movie_genre":"Documentary","production_year":"2010-10","budget":"$14133.09"},
+{"id":11,"movie_name":"Saving Lincoln","movie_genre":"Drama","production_year":"2006-12","budget":"$18929.53"},
+{"id":12,"movie_name":"Safe Passage","movie_genre":"Drama","production_year":"2017-04","budget":"$19164.00"},
+{"id":13,"movie_name":"Days and Hours (Kod amidze Idriza)","movie_genre":"Drama","production_year":"2017-02","budget":"$11954.76"},
+{"id":14,"movie_name":"Thing with Two Heads, The","movie_genre":"Comedy|Horror|Sci-Fi","production_year":"2016-01","budget":"$18131.86"},
+{"id":15,"movie_name":"Lost in the Desert","movie_genre":"Adventure|Drama|Thriller","production_year":"2000-02","budget":"$13841.19"},
+{"id":16,"movie_name":"Kiss Before Dying, A","movie_genre":"Thriller","production_year":"2006-10","budget":"$11214.25"},
+{"id":17,"movie_name":"Eros","movie_genre":"Drama","production_year":"1990-04","budget":"$11809.11"},
+{"id":18,"movie_name":"Sex and Fury (Furyô anego den: Inoshika Ochô)","movie_genre":"Action|Crime|Thriller","production_year":"2019-04","budget":"$19199.99"},
+{"id":19,"movie_name":"Lovely & Amazing","movie_genre":"Comedy|Drama|Romance","production_year":"2002-04","budget":"$9401.45"},
+{"id":20,"movie_name":"Nathalie...","movie_genre":"Drama","production_year":"2015-07","budget":"$17897.65"},
+{"id":21,"movie_name":"Date and Switch","movie_genre":"Comedy","production_year":"2017-09","budget":"$18963.12"},
+{"id":22,"movie_name":"Buffalo Girls","movie_genre":"Action","production_year":"2010-12","budget":"$13804.13"},
+{"id":23,"movie_name":"What Women Want","movie_genre":"Comedy|Romance","production_year":"2008-08","budget":"$13327.01"},
+{"id":24,"movie_name":"Lady of Burlesque","movie_genre":"Comedy|Mystery","production_year":"1994-10","budget":"$18563.70"},
+{"id":25,"movie_name":"All About Lola (Ce que je sais de Lola) (Lo que sé de Lola)","movie_genre":"Romance","production_year":"1995-01","budget":"$17862.89"},
+{"id":26,"movie_name":"Return Of The Ghostbusters","movie_genre":"Comedy","production_year":"1999-06","budget":"$16365.72"},
+{"id":27,"movie_name":"Shutter","movie_genre":"Horror|Mystery|Thriller","production_year":"2004-03","budget":"$17385.39"},
+{"id":28,"movie_name":"Where Love Has Gone","movie_genre":"Drama","production_year":"2019-01","budget":"$12766.65"},
+{"id":29,"movie_name":"Stranger, The","movie_genre":"Drama|Film-Noir|Thriller","production_year":"2001-06","budget":"$19465.53"},
+{"id":30,"movie_name":"Sharpe's Gold","movie_genre":"Action|Adventure|War","production_year":"2016-12","budget":"$17749.91"},
+{"id":31,"movie_name":"Werewolf, The","movie_genre":"Horror|Sci-Fi","production_year":"1993-10","budget":"$11688.20"},
+{"id":32,"movie_name":"Kiss for Corliss, A (Almost a Bride)","movie_genre":"Comedy","production_year":"2003-09","budget":"$13759.91"},
+{"id":33,"movie_name":"Children Shouldn't Play with Dead Things","movie_genre":"Horror","production_year":"2007-07","budget":"$11503.48"},
+{"id":34,"movie_name":"Sign of Four, The","movie_genre":"Crime|Mystery","production_year":"2003-07","budget":"$15152.84"},
+{"id":35,"movie_name":"Rules of Single Life (Sinkkuelämän säännöt)","movie_genre":"Documentary","production_year":"1991-11","budget":"$16649.12"},
+{"id":36,"movie_name":"West Point","movie_genre":"Drama|Romance","production_year":"2002-10","budget":"$11055.29"},
+{"id":37,"movie_name":"Actresses (Actrices)","movie_genre":"Comedy|Drama","production_year":"2015-03","budget":"$12920.00"},
+{"id":38,"movie_name":"Always","movie_genre":"Drama|Fantasy|Romance","production_year":"1991-07","budget":"$15548.76"}])
+
+ ***** Comparison Operators ****
+
+- find all movies which are equal to movie_name
+db.movies.find({movie_name: {$eq:"Lovely & Amazing"}}).pretty()
+
+- find all movies which are not equal to movie_name
+db.movies.find({movie_name:{$ne:"Lovely & Amazing"}}).pretty()
+
+- find all movies greater than and greater than equal to a budget
+db.movies.find({budget:{$gt:20000}})
+db.movies.find({budget:{$gte:20000}}).pretty()
+
+
+- find all movies less than and less than equal to a budget
+db.movies.find({budget:{$lt:9000}}).pretty()
+db.movies.find({budget:{$lte:9000}}).pretty()
+
+- find all movies that are produced after 2000 with budget greater than 10000
+db.movies.find({$and: [{"production_year":{$gt:2000}}, {"budget":{$gt:10000}}]}).pretty()
+
+- find all movies that are produced after 2000 or budget greater than 10000
+db.movies.find({$or: [{"production_year":{$gt:2000}}, {"budget":{$gt:10000}}]}).pretty()
+
+- find all movies that are neither produced after 2000 nor with budget greater than 10000.
+db.movies.find({$nor: [{"production_year":{$gt:2000}}, {"budget":{$gt:10000}}]}).pretty()
+
+- find all movies that are not produced in 2000 or they do not have budget of 10000
+db.movies.find({$or :[{"production_year" :{$not: {$eq: 2000}}}, {"budget":{$not: {$eq:10000}}}]}).pretty()
+
+- find all movies that were produced from 2000 to 2010.
+db.movies.find({$and :[{"production_year":{$gt:2000}}, {"production_year":{$lt:2010}}]}).pretty()
+
+- Sort all movies descending based on the production year and if the year is same then alphabetically for their movie_names
+db.movies.find({}).sort({production_year:-1}).pretty()
+
+- in query 10 skip the first 10 entries and fetch the next 5
+db.movies.find({}).sort({production_year:-1}).skip(10).limit(5).pretty()
